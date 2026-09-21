@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MY LOVE🫀</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      :root {
+        --pink: #ff2f6a;
+      }
+      * {
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+      }
+      body {
+        margin: 0;
+        background: #08080a;
+        color: white;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+      .bg {
+        position: fixed;
+        inset: 0;
+        background: url("https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1300")
+          center/cover;
+        filter: brightness(0.28);
+        z-index: -3;
+      }
+      .bgOver {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            800px at 30% 20%,
+            rgba(255, 47, 106, 0.12),
+            transparent
+          ),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.1), #08080a);
+        z-index: -2;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+      }
+      .hearts {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+      }
+      .heart {
+        position: absolute;
+        bottom: -20px;
+        animation: fly linear infinite;
+        opacity: 0.6;
+      }
+      @keyframes fly {
+        0% {
+          transform: translateY(0) scale(0.6);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-110vh) translateX(80px) scale(1.2)
+            rotate(360deg);
+          opacity: 0;
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Lock */
+      #lock {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: url(./g1.png) center/cover;
+      }
+      .lockCard {
+        width: 100%;
+        max-width: 400px;
+        padding: 40px 28px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(15px);
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .lockCard input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(0, 0, 0, 0.4);
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        outline: none;
+      }
+      .btn {
+        border: none;
+        border-radius: 14px;
+        padding: 14px 18px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .btnPink {
+        background: linear-gradient(90deg, #ff2f6a, #ff8fab);
+        color: white;
+      }
+
+      /* Gift */
+      #gift {
+        display: none;
+        min-height: 100vh;
+        overflow-y: auto;
+        background: url(./g3.png) center/cover fixed;
+      }
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(25px);
+        background: rgba(0, 0, 0, 0.7);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 12px 18px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 0 18px 140px;
+        width: 100%;
+      }
+      .hero {
+        padding: 60px 10px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: clamp(38px, 9vw, 64px);
+        font-weight: 900;
+        line-height: 1.1;
+        margin: 0;
+      }
+      .hero h1 span {
+        background: linear-gradient(90deg, #fff, #ff8fab);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .label {
+        text-align: center;
+        margin: 50px 0 18px;
+        font-size: 18px;
+        letter-spacing: 2px;
+        color: #ff8fab;
+        font-weight: 800;
+      }
+      .stories {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 10px 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .stories::-webkit-scrollbar {
+        display: none;
+      }
+      .story {
+        flex: 0 0 84px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .ring {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        padding: 3px;
+        background: conic-gradient(#feda75, #d62976, #4f5bd5, #feda75);
+      }
+      .ring img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #0a0a0c;
+      }
+
+      /* التايمر - متصلح */
+      .countFull {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .countFull.timeBox {
+        display: grid;
+        place-items: center;
+        text-align: center;
+        min-height: 110px;
+        padding: 20px 10px;
+      }
+      .countFull.timeBox strong {
+        font-size: 42px;
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(180deg, #fff, #ff8fab);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .countFull.timeBox span {
+        font-size: 14px;
+        opacity: 0.7;
+        margin-top: 6px;
+        display: block;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+      .tItem {
+        padding: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+      .musicBox {
+        margin-top: 22px;
+        padding: 26px;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+      .vinylWrap {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 18px;
+        position: relative;
+      }
+      .vinyl {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at center,
+          #222 0%,
+          #111 20%,
+          #000 21%,
+          #111 40%,
+          #222 41%,
+          #000 100%
+        );
+        display: grid;
+        place-items: center;
+        box-shadow:
+          0 0 0 6px rgba(255, 255, 255, 0.08),
+          0 15px 30px rgba(0, 0, 0, 0.5);
+        animation: spin 6s linear infinite;
+        animation-play-state: paused;
+      }
+      .vinyl.playing {
+        animation-play-state: running;
+      }
+      .vinyl img {
+        width: 52%;
+        height: 52%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #000;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .musicInfo h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 900;
+      }
+      .musicInfo p {
+        margin: 4px 0 14px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .progressArea {
+        height: 4px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 14px 0 8px;
+        cursor: pointer;
+      }
+      .progressBar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--pink), #ff8fab);
+        border-radius: 10px;
+      }
+      .timeRow {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-bottom: 18px;
+      }
+      .controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+      }
+      .ctrlBtn {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.06);
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+      .ctrlBtn.play {
+        width: 62px;
+        height: 62px;
+        background: linear-gradient(135deg, var(--pink), #ff8fab);
+        border: none;
+        font-size: 24px;
+        box-shadow: 0 8px 20px rgba(255, 47, 106, 0.4);
+      }
+      .eq {
+        display: flex;
+        gap: 3px;
+        justify-content: center;
+        height: 16px;
+        margin-top: 14px;
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .eq.playing {
+        opacity: 1;
+      }
+      .eq div {
+        width: 3px;
+        background: var(--pink);
+        border-radius: 10px;
+        animation: eq.6s infinite alternate;
+      }
+      @keyframes eq {
+        0% {
+          height: 4px;
+        }
+        100% {
+          height: 16px;
+        }
+      }
+      .saveBar {
+        position: fixed;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        background: rgba(20, 20, 20, 0.9);
+        backdrop-filter: blur(20px);
+        padding: 10px;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      #storyModal {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: none;
+        z-index: 99;
+        flex-direction: column;
+      }
+      .sProgWrap {
+        display: flex;
+        gap: 4px;
+        padding: 10px;
+      }
+      .sProgWrap div {
+        flex: 1;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .sProgWrap div i {
+        display: block;
+        height: 100%;
+        background: #fff;
+        width: 0%;
+      }
+      .storyNav {
+        position: absolute;
+        inset: 0;
+        display: flex;
+      }
+      .storyNav div {
+        flex: 1;
+      }
+      .sArrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        border: 0;
+        color: #fff;
+        font-size: 20px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        z-index: 5;
+      }
+      .sArrow.l {
+        left: 12px;
+      }
+      .sArrow.r {
+        right: 12px;
+      }
+
+      /* ===== Responsive الصح ===== */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 14px 120px;
+        }
+        .hero {
+          padding: 40px 10px;
+        }
+        .countFull {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+        }
+        .countFull.timeBox {
+          min-height: 90px;
+          padding: 15px 5px;
+        }
+        .countFull.timeBox strong {
+          font-size: 28px;
+        }
+        .stories {
+          gap: 10px;
+        }
+        .story {
+          flex: 0 0 70px;
+        }
+        .ring {
+          width: 70px;
+          height: 70px;
+        }
+        .musicBox {
+          padding: 18px;
+        }
+        .tItem {
+          padding: 14px;
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+      @media (max-width: 480px) {
+        .lockCard {
+          padding: 28px 18px;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .label {
+          font-size: 15px;
+          margin: 30px 0 12px;
+        }
+        .countFull {
+          gap: 6px;
+        }
+        .countFull.timeBox strong {
+          font-size: 24px;
+        }
+        .countFull.timeBox span {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="bgOver"></div>
+    <div class="hearts" id="hearts"></div>
+    <audio id="bgMusic" preload="auto"></audio>
+
+    <div id="lock">
+      <div class="lockCard glass">
+        <h1 style="margin: 0; font-weight: 900">MY LOVE</h1>
+        <p
+          style="
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            margin: 10px 0 22px;
+          "
+        >
+          بحبككككككك🫀
+        </p>
+        <div style="position: relative">
+          <span
+            style="
+              position: absolute;
+              left: 16px;
+              top: 50%;
+              transform: translateY(-50%);
+              font-size: 18px;
+              opacity: 0.7;
+            "
+            >🔑</span
+          >
+          <input
+            id="pass"
+            type="text"
+            placeholder="password"
+            style="padding-right: 48px !important"
+          />
+        </div>
+        <button
+          class="btn btnPink"
+          style="width: 100%; margin-top: 14px"
+          onclick="check()"
+        >
+          🎁OPEN
+        </button>
+        <div
+          id="error"
+          style="
+            display: none;
+            margin-top: 12px;
+            color: #ea7373;
+            font-size: 18px;
+          "
+        >
+          غلط❌
+        </div>
+      </div>
+    </div>
+
+    <div id="gift">
+      <div class="nav">
+        <div>❤️ <b>MY LOVE</b></div>
+      </div>
+      <div class="container">
+        <div class="hero">
+          <h1>بحبك ي<br /><span>مريم</span></h1>
+          <p style="color: rgba(255, 255, 255, 0.55); margin-top: 14px">
+            سنتين ولسه بحبك كل يوم أكتر من اللي قبله
+          </p>
+        </div>
+        <div class="stories reveal" id="stories"></div>
+        <div class="label reveal">رحلتنا سوا</div>
+        <div class="timeline reveal" id="timeline"></div>
+        <div class="label reveal">عدينا قد ايه سوا</div>
+        <div class="countFull reveal">
+          <div class="timeBox glass">
+            <strong id="years">2</strong><span>سنة</span>
+          </div>
+          <div class="timeBox glass">
+            <strong id="months">1</strong><span>شهر</span>
+          </div>
+          <div class="timeBox glass">
+            <strong id="days">7</strong><span>يوم</span>
+          </div>
+        </div>
+        <div class="label reveal">أغنيتنا</div>
+        <div class="musicBox glass reveal">
+          <div class="vinylWrap">
+            <div class="vinyl" id="vinyl">
+              <img
+                id="vinylImg"
+                src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=300"
+              />
+            </div>
+          </div>
+          <div class="musicInfo">
+            <h3 id="songTitle">أغنيتنا</h3>
+            <p id="songArtist">سنتين وشهر من الحب</p>
+          </div>
+          <div class="progressArea" id="progressArea" onclick="seek(event)">
+            <div class="progressBar" id="progressBar"></div>
+          </div>
+          <div class="timeRow">
+            <span id="currentTime">0:00</span><span id="totalTime">0:00</span>
+          </div>
+          <div class="controls">
+            <button class="ctrlBtn" onclick="prevSong()">⏮</button
+            ><button class="ctrlBtn play" id="playBtn" onclick="toggleMusic()">
+              ▶</button
+            ><button class="ctrlBtn" onclick="nextSong()">⏭</button>
+          </div>
+          <div class="eq" id="eq">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div id="captureArea" class="reveal">
+          <div class="label">رسالة من قلبي ليكي</div>
+          <div
+            class="glass"
+            id="messageCard"
+            style="padding: 34px 26px; text-align: center"
+          >
+            <div
+              style="white-space: pre-line; line-height: 2.4; font-size: 16.5px"
+              id="loveText"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="saveBar">
+        <button class="btn btnPink" onclick="saveAll()">📸 Save</button>
+      </div>
+    </div>
+
+    <div id="storyModal">
+      <div class="sProgWrap" id="sProgWrap"></div>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          padding: 0 12px;
+          align-items: center;
+        "
+      >
+        <div id="modalName" style="font-weight: 800; font-size: 14px"></div>
+        <button
+          onclick="closeStory()"
+          style="
+            background: 0;
+            border: 0;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+          "
+        >
+          ×
+        </button>
+      </div>
+      <div
+        style="
+          flex: 1;
+          position: relative;
+          display: grid;
+          place-items: center;
+          overflow: hidden;
+        "
+      >
+        <button class="sArrow l" onclick="prevStoryNav(event)">‹</button
+        ><button class="sArrow r" onclick="nextStoryNav(event)">›</button>
+        <div class="storyNav">
+          <div onclick="prevStoryNav(event)"></div>
+          <div onclick="nextStoryNav(event)"></div>
+        </div>
+        <img
+          id="modalImg"
+          style="max-width: 100%; max-height: 80vh; object-fit: contain"
+        />
+      </div>
+      <p
+        id="modalCap"
+        style="text-align: center; color: #888; padding: 14px"
+      ></p>
+    </div>
+
+    <script>
+      const CONFIG = {
+        PASSWORD: "1",
+        START_DATE: "2024-08-18T00:00:00",
+        PLAYLIST: [
+          {
+            title: "نصيبي الحلو 🫀",
+            artist: "حب عمري",
+            src: "./music.mp3",
+            cover:
+              "https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=300",
+          },
+          {
+            title: "ياريت يكمل معاك عمري 🫀",
+            artist: "أجمل سنين في حياتي",
+            src: "./music2.mp3",
+            cover:
+              "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300",
+          },
+        ],
+        STORIES: [
+          { img: "g1.png", name: "أول مرة", cap: "أول مرة شفتك فيها " },
+          { img: "g7.png", name: "سنة 1", cap: "أول سنة عدت واحنا سوا" },
+          { img: "g8.png", name: "سنتين", cap: "سنتين من الحب" },
+          { img: "g9.png", name: "دلوقتي", cap: "سنتين وشهر ولسه مكملين" },
+        ],
+        DATES: [
+          {
+            icon: "💘",
+            title: "أول مرة شفنا بعض",
+            date: "18 أغسطس 2024",
+            desc: "اليوم اللي حياتي بدأت فيه بجد يا ",
+          },
+          {
+            icon: "💬",
+            title: "أول اعتراف",
+            date: "سبتمبر 2024",
+            desc: "اليوم اللي قولتلك بحبك لأول مرة",
+          },
+          {
+            icon: "🎉",
+            title: "كملنا سنة",
+            date: "18 أغسطس 2025",
+            desc: "أول سنة وأجمل سنة عدت عليا",
+          },
+          {
+            icon: "❤️",
+            title: "النهاردة",
+            date: "سنتين وشهر",
+            desc: "سنتين وشهر وانتي أجمل حاجة في دنيتي",
+          },
+        ],
+        MESSAGE: `🫀MY LOVE...\n\nسنتين وشهر.\n\nسنتين وشهر وانتي معايا،\nسنتين وشهر وانا كل يوم بصحى\nعايز اكلمك واشوفك واضحك معاكي.\n\nفاكرة أول مرة؟\nكنت متوتر وبعمل نفسي جامد،\nبس من جوا قلبي كان بيتنطط.\n\nسنتين وشهر عدوا بسرعة،\nبس كل لحظة فيهم محفورة جوايا.\n\nانتي مش بس حبيبتي يا مريم،\nانتي صاحبتي، واختي، ودنيتي كلها.\n\nلو رجع بيا الزمن سنتين وشهر،\nهختارك انتي تاني وتالت ومليون.\n\nبحبك قد كل الثواني اللي عدت\nوبحبك أكتر في كل ثانية جاية.\n\nسنتين وشهر ولسه البداية...\n\n- حبيبك اللي مش شايف غيرك ❤️`,
+      };
+      let currentSong = 0,
+        isPlaying = false,
+        curStory = 0,
+        storyTimer;
+      const audio = document.getElementById("bgMusic"),
+        vinyl = document.getElementById("vinyl"),
+        eq = document.getElementById("eq"),
+        playBtn = document.getElementById("playBtn");
+      document.getElementById("loveText").innerText = CONFIG.MESSAGE;
+      document.getElementById("stories").innerHTML = CONFIG.STORIES.map(
+        (s, i) =>
+          `<div class="story" onclick="openStory(${i})"><div class="ring"><img src="${s.img}"></div><div style="font-size:11px;margin-top:6px">${s.name}</div></div>`,
+      ).join("");
+      document.getElementById("timeline").innerHTML = CONFIG.DATES.map(
+        (d) =>
+          `<div class="tItem glass"><div style="width:44px;height:44px;border-radius:12px;background:rgba(255,47,106,0.15);display:grid;place-items:center;font-size:20px;flex:0 0 44px">${d.icon}</div><div><div style="font-weight:800;font-size:14px">${d.title} • ${d.date}</div><div style="font-size:12px;color:rgba(255,255,255,0.55)">${d.desc}</div></div></div>`,
+      ).join("");
+      function loadSong(i) {
+        currentSong = i;
+        const s = CONFIG.PLAYLIST[i];
+        audio.src = s.src;
+        document.getElementById("songTitle").innerText = s.title;
+        document.getElementById("songArtist").innerText = s.artist;
+        document.getElementById("vinylImg").src = s.cover;
+      }
+      function toggleMusic() {
+        if (isPlaying) {
+          audio.pause();
+          playBtn.innerText = "▶";
+          vinyl.classList.remove("playing");
+          eq.classList.remove("playing");
+          isPlaying = false;
+        } else {
+          audio.play().catch(() => {});
+          playBtn.innerText = "⏸";
+          vinyl.classList.add("playing");
+          eq.classList.add("playing");
+          isPlaying = true;
+        }
+      }
+      function nextSong() {
+        loadSong((currentSong + 1) % CONFIG.PLAYLIST.length);
+        audio.play().then(() => {
+          playBtn.innerText = "⏸";
+          vinyl.classList.add("playing");
+          eq.classList.add("playing");
+          isPlaying = true;
+        });
+      }
+      function prevSong() {
+        loadSong(
+          (currentSong - 1 + CONFIG.PLAYLIST.length) % CONFIG.PLAYLIST.length,
+        );
+        audio.play().then(() => {
+          playBtn.innerText = "⏸";
+          vinyl.classList.add("playing");
+          eq.classList.add("playing");
+          isPlaying = true;
+        });
+      }
+      audio.addEventListener("timeupdate", () => {
+        const p = (audio.currentTime / audio.duration) * 100 || 0;
+        document.getElementById("progressBar").style.width = p + "%";
+        document.getElementById("currentTime").innerText = format(
+          audio.currentTime,
+        );
+        document.getElementById("totalTime").innerText = format(
+          audio.duration || 0,
+        );
+      });
+      audio.addEventListener("ended", nextSong);
+      function seek(e) {
+        const w = e.currentTarget.clientWidth;
+        audio.currentTime = (e.offsetX / w) * audio.duration;
+      }
+      function format(t) {
+        if (isNaN(t)) return "0:00";
+        let m = Math.floor(t / 60);
+        let s = Math.floor(t % 60);
+        return m + ":" + (s < 10 ? "0" + s : s);
+      }
+      loadSong(0);
+      (function () {
+        const c = document.getElementById("hearts");
+        setInterval(() => {
+          let h = document.createElement("div");
+          h.className = "heart";
+          h.innerText = "❤️";
+          h.style.left = Math.random() * 100 + "vw";
+          h.style.fontSize = 12 + Math.random() * 18 + "px";
+          h.style.animationDuration = 4 + Math.random() * 6 + "s";
+          c.appendChild(h);
+          setTimeout(() => h.remove(), 8000);
+        }, 400);
+      })();
+      const obs = new IntersectionObserver(
+        (es) => {
+          es.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("show");
+          });
+        },
+        { threshold: 0.15 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+      function check() {
+        if (document.getElementById("pass").value === CONFIG.PASSWORD) {
+          document.getElementById("lock").style.opacity = "0";
+          setTimeout(() => {
+            document.getElementById("lock").style.display = "none";
+            document.getElementById("gift").style.display = "block";
+            document.body.style.overflow = "auto";
+            startTimer();
+            audio
+              .play()
+              .then(() => {
+                playBtn.innerText = "⏸";
+                vinyl.classList.add("playing");
+                eq.classList.add("playing");
+                isPlaying = true;
+              })
+              .catch(() => {});
+          }, 400);
+        } else document.getElementById("error").style.display = "block";
+      }
+      function startTimer() {
+        const start = new Date(CONFIG.START_DATE);
+        setInterval(() => {
+          const now = new Date();
+          let diff = now - start;
+          const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+          const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          document.getElementById("years").innerText = years;
+          document.getElementById("months").innerText = months;
+          document.getElementById("days").innerText = days;
+        }, 1000);
+      }
+      function buildProg() {
+        const w = document.getElementById("sProgWrap");
+        w.innerHTML = CONFIG.STORIES.map(() => `<div><i></i></div>`).join("");
+      }
+      buildProg();
+      function updateProg() {
+        document.querySelectorAll("#sProgWrap div i").forEach((el, i) => {
+          el.style.transition = "none";
+          if (i < curStory) el.style.width = "100%";
+          else if (i === curStory) {
+            el.style.width = "0%";
+            void el.offsetWidth;
+            el.style.transition = "width 5s linear";
+            el.style.width = "100%";
+          } else el.style.width = "0%";
+        });
+      }
+      function renderStory() {
+        document.getElementById("modalImg").src = CONFIG.STORIES[curStory].img;
+        document.getElementById("modalCap").innerText =
+          CONFIG.STORIES[curStory].cap;
+        document.getElementById("modalName").innerText =
+          CONFIG.STORIES[curStory].name;
+        updateProg();
+      }
+      function openStory(i) {
+        curStory = i;
+        document.getElementById("storyModal").style.display = "flex";
+        renderStory();
+        clearTimeout(storyTimer);
+        storyTimer = setTimeout(() => {
+          if (curStory < CONFIG.STORIES.length - 1) {
+            curStory++;
+            renderStory();
+            openStory(curStory);
+          } else closeStory();
+        }, 5000);
+      }
+      function closeStory() {
+        document.getElementById("storyModal").style.display = "none";
+        clearTimeout(storyTimer);
+      }
+      function nextStoryNav(e) {
+        e.stopPropagation();
+        if (curStory < CONFIG.STORIES.length - 1) {
+          curStory++;
+          renderStory();
+          clearTimeout(storyTimer);
+          storyTimer = setTimeout(() => {
+            if (curStory < CONFIG.STORIES.length - 1) {
+              curStory++;
+              renderStory();
+              openStory(curStory);
+            } else closeStory();
+          }, 5000);
+        } else closeStory();
+      }
+      function prevStoryNav(e) {
+        e.stopPropagation();
+        if (curStory > 0) {
+          curStory--;
+          renderStory();
+          clearTimeout(storyTimer);
+          storyTimer = setTimeout(() => {
+            curStory++;
+            renderStory();
+            openStory(curStory);
+          }, 5000);
+        }
+      }
+      let sx = 0;
+      const modal = document.getElementById("storyModal");
+      modal.addEventListener("touchstart", (e) => (sx = e.touches[0].clientX));
+      modal.addEventListener("touchend", (e) => {
+        let dx = e.changedTouches[0].clientX - sx;
+        if (dx < -50) nextStoryNav(e);
+        if (dx > 50) prevStoryNav(e);
+      });
+      function saveAll() {
+        const b = document.querySelector(".saveBar button");
+        b.innerText = "⏳ ثواني...";
+        html2canvas(document.getElementById("captureArea"), {
+          scale: 3,
+          useCORS: true,
+          backgroundColor: "#0e0e12",
+        }).then((c) => {
+          let a = document.createElement("a");
+          a.download = "-MY-LOVE🫀-.png";
+          a.href = c.toDataURL();
+          a.click();
+          b.innerText = "📸 Save";
+        });
+      }
+      document.getElementById("pass").addEventListener("keyup", (e) => {
+        if (e.key === "Enter") check();
+      });
+    </script>
+  </body>
+</html>
